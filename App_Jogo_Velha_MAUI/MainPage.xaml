@@ -13,19 +13,33 @@
     </ContentPage.Background>
     
     <ContentPage.Resources>
-        <Style TargetType="Button" x:Key="btn_game">
-            <Setter Property="FontSize" Value="Large"/>
-            <Setter Property="TextColor" Value="#FFFFFF"/>
+        <Style TargetType="Label" x:Key="lbl_title_style">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Title"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#000000"/>
+        </Style>
+        
+        <Style TargetType="Button" x:Key="btn_game_style">
             <Setter Property="BackgroundColor" Value="#202020"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#FFFFFF"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btn_reset_style">
+            <Setter Property="BackgroundColor" Value="#000000"/>
+            <Setter Property="FontSize" Value="Small"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#FFFFFF"/>
         </Style>
     </ContentPage.Resources>
     
     <ContentPage.Content>
         <ScrollView>
             <Grid
-                x:Name="grid_game"
-                ColumnDefinitions="*,*,*,*"
-                RowDefinitions="Auto,*,*,*,*,Auto"
+                ColumnDefinitions="*"
+                RowDefinitions="Auto,*,Auto"
                 ColumnSpacing="15"
                 RowSpacing="15"
                 Padding="15"
@@ -37,153 +51,29 @@
                     Grid.Column="0"
                     Grid.Row="0"
                     Text="JOGO DA VELHA"
-                    FontSize="Title"
-                    FontAttributes="Bold"
-                    TextColor="#000000"
-                    HorizontalTextAlignment="Center"
+                    Style="{ StaticResource lbl_title_style }"
                 />
-                
+
                 <!-- Opções -->
-
-                <Button
-                    StyleId="btn_game"
+                
+                <Grid
+                    x:Name="grid_game"
                     Grid.Column="0"
                     Grid.Row="1"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="2"
-                    Grid.Row="1"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="3"
-                    Grid.Row="1"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="2"
-                    Grid.Row="2"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="3"
-                    Grid.Row="2"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="0"
-                    Grid.Row="3"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="1"
-                    Grid.Row="3"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="2"
-                    Grid.Row="3"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="3"
-                    Grid.Row="3"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="0"
-                    Grid.Row="4"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="1"
-                    Grid.Row="4"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="2"
-                    Grid.Row="4"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
-
-                <Button
-                    StyleId="btn_game"
-                    Grid.Column="3"
-                    Grid.Row="4"
-                    Style="{ StaticResource btn_game }"
-                    Clicked="btn_game_Clicked"
-                />
+                    ColumnSpacing="15"
+                    RowSpacing="15"
+                >
+                    <!-- Botões do Jogo (Gerados) -->
+                </Grid>
 
                 <!-- Botão de Reset -->
 
                 <Button
                     x:Name="btn_reset"
                     Grid.Column="0"
-                    Grid.Row="5"
-                    Grid.ColumnSpan="4"
+                    Grid.Row="2"
                     Text="Reiniciar"
-                    FontAttributes="Bold"
-                    TextColor="#FFFFFF"
-                    BackgroundColor="#000000"
+                    Style="{ StaticResource btn_reset_style }"
                     Clicked="btn_reset_Clicked"
                 />
             </Grid>

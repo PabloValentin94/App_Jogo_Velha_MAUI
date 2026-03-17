@@ -26,11 +26,9 @@ namespace App_Jogo_Velha_MAUI
         {
             InitializeComponent();
 
-            Grid.SetColumnSpan(lbl_title, this.game_matrix_dimensions_length);
-
-            Grid.SetColumnSpan(btn_reset, this.game_matrix_dimensions_length);
-
             this.game_moves = new string[this.game_matrix_dimensions_length, this.game_matrix_dimensions_length];
+
+            GenerateGridGameLayout();
 
             ResetGameMatrix();
         }
@@ -50,6 +48,43 @@ namespace App_Jogo_Velha_MAUI
             }
 
             Debug.WriteLine("\n Quantidade atual de jogadas: " + this.total_game_moves.ToString() + ".");
+        }
+
+        private void GenerateGridGameLayout()
+        {
+            grid_game.Children.Clear();
+
+            grid_game.RowDefinitions.Clear();
+            grid_game.ColumnDefinitions.Clear();
+
+            for (int i = 0; i < this.game_matrix_dimensions_length; i++)
+            {
+                grid_game.RowDefinitions.Add(new RowDefinition()
+                {
+                    Height = GridLength.Star
+                });
+
+                grid_game.ColumnDefinitions.Add(new ColumnDefinition()
+                {
+                    Width = GridLength.Star
+                });
+            }
+
+            for (int row_index = 0; row_index < this.game_matrix_dimensions_length; row_index++)
+            {
+                for (int column_index = 0; column_index < this.game_matrix_dimensions_length; column_index++)
+                {
+                    Button btn_game = new Button()
+                    {
+                        StyleId = "btn_game",
+                        Style = (Style) this.Resources["btn_game_style"]
+                    };
+
+                    btn_game.Clicked += btn_game_Clicked;
+
+                    grid_game.Add(btn_game, column_index, row_index);
+                }
+            }
         }
 
         private void ResetGameButtons()
@@ -120,10 +155,10 @@ namespace App_Jogo_Velha_MAUI
 
             // Verificando a diagonal principal.
 
-            for (int k = 1; k < this.game_matrix_dimensions_length; k++)
+            for (int i = 1; i < this.game_matrix_dimensions_length; i++)
             {
-                if (!String.IsNullOrWhiteSpace(this.game_moves[k - 1, k - 1]) &&
-                    this.game_moves[k - 1, k - 1] == this.game_moves[k, k])
+                if (!String.IsNullOrWhiteSpace(this.game_moves[i - 1, i - 1]) &&
+                    this.game_moves[i - 1, i - 1] == this.game_moves[i, i])
                 {
                     primary_diagonal_repetition_count++;
                 }
@@ -133,10 +168,10 @@ namespace App_Jogo_Velha_MAUI
 
             int secondary_diagonal_repetition_count = 0;
 
-            for (int l = 1; l < this.game_matrix_dimensions_length; l++)
+            for (int j = 1; j < this.game_matrix_dimensions_length; j++)
             {
-                if (!String.IsNullOrWhiteSpace(this.game_moves[l - 1, this.game_matrix_dimensions_length - l]) &&
-                    this.game_moves[l - 1, this.game_matrix_dimensions_length - l] == this.game_moves[l, this.game_matrix_dimensions_length - l - 1])
+                if (!String.IsNullOrWhiteSpace(this.game_moves[j - 1, this.game_matrix_dimensions_length - j]) &&
+                    this.game_moves[j - 1, this.game_matrix_dimensions_length - j] == this.game_moves[j, this.game_matrix_dimensions_length - j - 1])
                 {
                     secondary_diagonal_repetition_count++;
                 }
@@ -177,15 +212,15 @@ namespace App_Jogo_Velha_MAUI
             }
         }
 
-        private async void btn_game_Clicked(object sender, EventArgs e)
+        private async void btn_game_Clicked(object? sender, EventArgs e)
         {
-            Button event_button = (Button) sender;
+            Button? event_button = (Button?) sender;
 
-            if (this.game_is_on_going && String.IsNullOrWhiteSpace(event_button.Text))
+            if (event_button != null && this.game_is_on_going && String.IsNullOrWhiteSpace(event_button.Text))
             {
                 event_button.Text = turn;
 
-                int event_button_row = Grid.GetRow(event_button) - 1;
+                int event_button_row = Grid.GetRow(event_button);
                 int event_button_column = Grid.GetColumn(event_button);
 
                 this.game_moves[event_button_row, event_button_column] = this.turn;
