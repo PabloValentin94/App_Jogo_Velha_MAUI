@@ -4,7 +4,7 @@ namespace App_Jogo_Velha_MAUI
 {
     public partial class MainPage : ContentPage
     {
-        readonly int game_matrix_dimensions_length = 4;
+        readonly int game_matrix_dimensions_length = 4; // Número de casas.
 
         string[,] game_moves;
 
